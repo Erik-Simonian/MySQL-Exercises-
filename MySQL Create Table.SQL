@@ -157,6 +157,14 @@ CREATE TABLE IF NOT EXISTS job_history (
 -- combined by department_id and manager_id columns contain only those unique combination values,
 -- which combinations are exists in the departments table.
 
+CREATE TABLE IF NOT EXISTS departments (
+    department_id INT NOT NULL,
+    department_name VARCHAR(30) DEFAULT NULL,
+    manager_id INT NOT NULL,
+    location_id decimal (4, 0) DEFAULT NULL,
+    PRIMARY KEY (department_id, manager_id)
+);
+
 CREATE TABLE IF NOT EXISTS employees (
     employee_id INT UNIQUE NOT NULL,
     first_name VARCHAR(20) NOT NULL,
@@ -171,3 +179,51 @@ CREATE TABLE IF NOT EXISTS employees (
     department_id INT DEFAULT NULL,
     FOREIGN KEY (department_id, manager_id) REFERENCES departments(department_id, manager_id)
 );
+
+
+-- 16. Write a SQL statement to create a table employees including columns employee_id, first_name, last_name, email,
+-- phone_number hire_date, job_id, salary, commission, manager_id and department_id and make sure that,
+-- the employee_id column does not contain any duplicate value at the time of insertion,
+-- and the foreign key column department_id, reference by the column department_id of departments table,
+-- can contain only those values which are exists in the departments table and another foreign key column job_id,
+-- referenced by the column job_id of jobs table, can contain only those values which are exists in the jobs table.
+
+CREATE TABLE IF NOT EXISTS employees
+(
+    employee_id   INT UNIQUE  NOT NULL,
+    first_name    VARCHAR(20) NOT NULL,
+    last_name     VARCHAR(20) NOT NULL,
+    email         VARCHAR(40) NOT NULL,
+    phone_number  VARCHAR(20)   DEFAULT NULL,
+    hire_date     DATE        NOT NULL,
+    job_id        VARCHAR(20) NOT NULL,
+    salary        INT           DEFAULT NULL,
+    commission    decimal(2, 2) DEFAULT NULL,
+    manager_id    INT           DEFAULT NULL,
+    department_id INT           DEFAULT NULL,
+    FOREIGN KEY (department_id) REFERENCES departments (department_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+);
+
+
+-- 17. Write a SQL statement to create a table employees including columns employee_id, first_name, last_name, job_id,
+-- salary and make sure that, the employee_id column does not contain any duplicate value at the time of insertion,
+-- and the foreign key column job_id, referenced by the column job_id of jobs table,
+-- can contain only those values which are exists in the jobs table.
+
+CREATE TABLE IF NOT EXISTS jobs (
+JOB_ID integer NOT NULL UNIQUE PRIMARY KEY,
+JOB_TITLE varchar(35) NOT NULL DEFAULT ' ',
+MIN_SALARY decimal(6,0) DEFAULT 8000,
+MAX_SALARY decimal(6,0) DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS employees (
+    employee_id   INT UNIQUE  NOT NULL,
+    first_name    VARCHAR(20) NOT NULL,
+    last_name     VARCHAR(20) NOT NULL,
+    job_id        VARCHAR(20) NOT NULL,
+    salary INT NOT NULL,
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+);
+
