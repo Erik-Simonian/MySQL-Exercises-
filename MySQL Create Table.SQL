@@ -209,7 +209,9 @@ CREATE TABLE IF NOT EXISTS employees
 -- 17. Write a SQL statement to create a table employees including columns employee_id, first_name, last_name, job_id,
 -- salary and make sure that, the employee_id column does not contain any duplicate value at the time of insertion,
 -- and the foreign key column job_id, referenced by the column job_id of jobs table,
--- can contain only those values which are exists in the jobs table.
+-- can contain only those values which are exists in the jobs table.The specialty of the statement is that,
+-- The ON UPDATE CASCADE action allows you to perform cross-table update and ON DELETE RESTRICT action r
+-- eject the deletion. The default action is ON DELETE RESTRICT.
 
 CREATE TABLE IF NOT EXISTS jobs (
 JOB_ID integer NOT NULL UNIQUE PRIMARY KEY,
@@ -227,3 +229,37 @@ CREATE TABLE IF NOT EXISTS employees (
     FOREIGN KEY (job_id) REFERENCES jobs(job_id)
 );
 
+
+-- 18. Write a SQL statement to create a table employees including columns employee_id, first_name, last_name, job_id,
+-- salary and make sure that, the employee_id column does not contain any duplicate value at the time of insertion,
+-- and the foreign key column job_id, referenced by the column job_id of jobs table, can contain only those values
+-- which are exists in the jobs table. The specialty of the statement is that, The ON DELETE CASCADE that lets you
+-- allow to delete records in the employees(child) table that refer to a record in the jobs(parent) table
+-- when the record in the parent table is deleted and the ON UPDATE RESTRICT actions reject any updates.
+
+CREATE TABLE IF NOT EXISTS jobs (
+JOB_ID integer NOT NULL UNIQUE PRIMARY KEY,
+JOB_TITLE varchar(35) NOT NULL DEFAULT ' ',
+MIN_SALARY decimal(6,0) DEFAULT 8000,
+MAX_SALARY decimal(6,0) DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS employees (
+    employee_id   INT UNIQUE  NOT NULL,
+    first_name    VARCHAR(20) NOT NULL,
+    last_name     VARCHAR(20) NOT NULL,
+    job_id        VARCHAR(20) NOT NULL,
+    salary INT NOT NULL,
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+    ON DELETE CASCADE ON UPDATE RESTRICT
+);
+
+
+-- 19. Write a SQL statement to create a table employees including columns employee_id, first_name, last_name, job_id,
+-- salary and make sure that, the employee_id column does not contain any duplicate value at the time of insertion,
+-- and the foreign key column job_id, referenced by the column job_id of jobs table, can contain only those values
+-- which are exists in the jobs table. The specialty of the statement is that, The ON DELETE SET NULL action
+-- will set the foreign key column values in the child table(employees) to NULL when the record in the
+-- parent table(jobs) is deleted, with a condition that the foreign key column in the child table
+-- must accept NULL values and the ON UPDATE SET NULL action resets the values in the rows in the child table(employees)
+-- to NULL values when the rows in the parent table(jobs) are updated.
