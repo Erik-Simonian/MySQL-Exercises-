@@ -71,10 +71,10 @@ SELECT * FROM country_new;
 -- that no duplicate value will be entered in the job_id column.
 
 CREATE TABLE IF NOT EXISTS jobs (
-JOB_ID INT NOT NULL UNIQUE,
-JOB_TITLE VARCHAR(35) NOT NULL,
-MIN_SALARY DECIMAL(6,0) DEFAULT 8000,
-MAX_SALARY DECIMAL(6,0) DEFAULT NULL
+    job_id INT NOT NULL UNIQUE,
+    job_title VARCHAR(35) NOT NULL,
+    min_salary DECIMAL(6,0) DEFAULT 8000,
+    max_salary DECIMAL(6,0) DEFAULT NULL
 );
 
 INSERT INTO jobs VALUES (001, 'Clerk', 10000, 35000);
@@ -122,3 +122,27 @@ INSERT INTO countries VALUES (764, 'Thailand', 'THA');
 -- 11. Write a SQL statement to insert rows in the job_history table in which one column job_id is containing
 -- those values which exist in job_id column of jobs table.
 
+CREATE TABLE IF NOT EXISTS jobs (
+    job_id INT NOT NULL UNIQUE,
+    job_title VARCHAR(35) NOT NULL,
+    min_salary DECIMAL(6,0) DEFAULT 8000,
+    max_salary DECIMAL(6,0) DEFAULT NULL
+);
+
+INSERT INTO jobs(jobs.job_id, jobs.job_title) VALUES (001, 'Clerk');
+INSERT INTO jobs(jobs.job_id, jobs.job_title) VALUES (010, 'Manager');
+
+
+CREATE TABLE IF NOT EXISTS job_history (
+    employee_id integer NOT NULL,
+    job_id integer NOT NULL,
+    department_id integer DEFAULT NULL,
+    PRIMARY KEY (employee_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+);
+
+INSERT INTO job_history VALUES (117, 001, 13);
+
+
+-- 13. Write a SQL statement to insert rows into the table employees in which a set of columns department_id
+-- and manager_id contains a unique value and that combined values must have exists into the table departments.
