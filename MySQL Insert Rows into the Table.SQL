@@ -180,5 +180,5 @@ CREATE TABLE IF NOT EXISTS employees (
 
 INSERT INTO employees VALUES (115, 'William', 'Birkin', 'WillBir@rcity.com', NULL, '1998-09-23', 'Virologist', 350000,
                               DEFAULT, 501, 05);
-INSERT INTO employees VALUES (37, 'HANK', NULL, NULL, NULL, '1996-01-01', 'Security',
+INSERT INTO employees VALUES (37, 'HUNK', NULL, NULL, NULL, '1996-01-01', 'Security',
                               NULL, DEFAULT, 1001,10);
