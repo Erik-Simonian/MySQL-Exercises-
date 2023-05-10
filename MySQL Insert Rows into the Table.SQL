@@ -144,5 +144,41 @@ CREATE TABLE IF NOT EXISTS job_history (
 INSERT INTO job_history VALUES (117, 001, 13);
 
 
--- 13. Write a SQL statement to insert rows into the table employees in which a set of columns department_id
+-- 12. Write a SQL statement to insert rows into the table employees in which a set of columns department_id
 -- and manager_id contains a unique value and that combined values must have exists into the table departments.
+
+CREATE TABLE IF NOT EXISTS departments (
+    department_id INT UNIQUE NOT NULL,
+    department_name VARCHAR(20) NOT NULL,
+    manager_id INT NOT NULL,
+    location_id INT DEFAULT NULL,
+    PRIMARY KEY (department_id, manager_id)
+);
+
+INSERT INTO departments VALUES (01, 'Corporate', 101, 15);
+INSERT INTO departments VALUES (03, 'Marketing', 301, 17);
+INSERT INTO departments VALUES (05, 'R&D',501, 11);
+INSERT INTO departments VALUES (10, 'Security', 1001, 02);
+
+
+CREATE TABLE IF NOT EXISTS employees (
+    employee_id    INT         NOT NULL,
+    first_name     VARCHAR(20) DEFAULT NULL,
+    last_name      VARCHAR(25) DEFAULT NULL,
+    email          VARCHAR(25) DEFAULT NULL,
+    phone_number   VARCHAR(25) DEFAULT NULL,
+    hire_date      DATE,
+    job_id         VARCHAR(10) NOT NULL,
+    salary         INT         DEFAULT NULL,
+    commission_pct INT         DEFAULT 0,
+    manager_id     INT UNIQUE  DEFAULT NULL,
+    department_id  INT UNIQUE  DEFAULT NULL,
+    FOREIGN KEY (department_id, manager_id)
+        REFERENCES departments(department_id, manager_id),
+    PRIMARY KEY (employee_id)
+);
+
+INSERT INTO employees VALUES (115, 'William', 'Birkin', 'WillBir@rcity.com', NULL, '1998-09-23', 'Virologist', 350000,
+                              DEFAULT, 501, 05);
+INSERT INTO employees VALUES (37, 'HANK', NULL, NULL, NULL, '1996-01-01', 'Security',
+                              NULL, DEFAULT, 1001,10);
