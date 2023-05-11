@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS employees (
     job_id         VARCHAR(10) NOT NULL,
     salary         INT         DEFAULT NULL,
     commission_pct INT         DEFAULT 0,
-    manager_id     INT UNIQUE  DEFAULT NULL,
+    manager_id     INT   DEFAULT NULL,
     department_id  INT UNIQUE  DEFAULT NULL,
     FOREIGN KEY (department_id, manager_id)
         REFERENCES departments(department_id, manager_id),
@@ -182,3 +182,52 @@ INSERT INTO employees VALUES (115, 'William', 'Birkin', 'WillBir@rcity.com', NUL
                               DEFAULT, 501, 05);
 INSERT INTO employees VALUES (37, 'HUNK', NULL, NULL, NULL, '1996-01-01', 'Security',
                               NULL, DEFAULT, 1001,10);
+
+
+
+-- 13. Write a SQL statement to insert rows into the table employees in which a set of columns department_id
+-- and job_id contains the values which must have exists into the table departments and jobs.
+
+CREATE TABLE IF NOT EXISTS employees (
+    employee_id    INT         NOT NULL,
+    first_name     VARCHAR(20) DEFAULT NULL,
+    last_name      VARCHAR(25) DEFAULT NULL,
+    email          VARCHAR(25) DEFAULT NULL,
+    phone_number   VARCHAR(25) DEFAULT NULL,
+    hire_date      DATE,
+    job_id         INT NOT NULL,
+    salary         INT         DEFAULT NULL,
+    commission_pct INT         DEFAULT 0,
+    manager_id     INT  DEFAULT NULL,
+    department_id  INT UNIQUE  DEFAULT NULL,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id),
+    PRIMARY KEY (employee_id)
+);
+
+CREATE TABLE IF NOT EXISTS departments (
+    department_id   INT UNIQUE  NOT NULL,
+    department_name VARCHAR(20) NOT NULL,
+    manager_id      INT         NOT NULL,
+    location_id     INT DEFAULT NULL,
+    PRIMARY KEY (department_id)
+);
+
+INSERT INTO departments VALUES (01, 'Corporate', 101, 15);
+INSERT INTO departments VALUES (03, 'Marketing', 301, 17);
+INSERT INTO departments VALUES (05, 'R&D',501, 11);
+INSERT INTO departments VALUES (10, 'Security', 1001, 02);
+
+
+CREATE TABLE IF NOT EXISTS jobs (
+    job_id INT NOT NULL UNIQUE,
+    job_title VARCHAR(35) NOT NULL DEFAULT ' ',
+    min_salary DECIMAL(6,0) DEFAULT 8000,
+    max_salary DECIMAL(6,0) DEFAULT NULL,
+    PRIMARY KEY (job_id)
+);
+
+INSERT INTO jobs(jobs.job_id, jobs.job_title) VALUES (1023, 'Agent');
+
+INSERT INTO employees VALUES (111, 'Albert', 'Wesker', 'uroboros@rcity.com', NULL, '1999-08-24', 1023, 500000,
+                              25, 1001, 10);
