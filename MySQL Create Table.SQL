@@ -214,10 +214,10 @@ CREATE TABLE IF NOT EXISTS employees
 -- eject the deletion. The default action is ON DELETE RESTRICT.
 
 CREATE TABLE IF NOT EXISTS jobs (
-JOB_ID integer NOT NULL UNIQUE PRIMARY KEY,
-JOB_TITLE varchar(35) NOT NULL DEFAULT ' ',
-MIN_SALARY decimal(6,0) DEFAULT 8000,
-MAX_SALARY decimal(6,0) DEFAULT NULL
+job_id integer NOT NULL UNIQUE PRIMARY KEY,
+    job_tittle varchar(35) NOT NULL DEFAULT ' ',
+    min_salary decimal(6,0) DEFAULT 8000,
+    max_salary decimal(6,0) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS employees (
@@ -238,10 +238,10 @@ CREATE TABLE IF NOT EXISTS employees (
 -- when the record in the parent table is deleted and the ON UPDATE RESTRICT actions reject any updates.
 
 CREATE TABLE IF NOT EXISTS jobs (
-JOB_ID integer NOT NULL UNIQUE PRIMARY KEY,
-JOB_TITLE varchar(35) NOT NULL DEFAULT ' ',
-MIN_SALARY decimal(6,0) DEFAULT 8000,
-MAX_SALARY decimal(6,0) DEFAULT NULL
+    job_id integer NOT NULL UNIQUE PRIMARY KEY,
+    job_title varchar(35) NOT NULL DEFAULT ' ',
+    min_salary decimal(6,0) DEFAULT 8000,
+    max_salary decimal(6,0) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS employees (
@@ -265,10 +265,10 @@ CREATE TABLE IF NOT EXISTS employees (
 -- to NULL values when the rows in the parent table(jobs) are updated.
 
 CREATE TABLE IF NOT EXISTS jobs (
-JOB_ID integer NOT NULL UNIQUE PRIMARY KEY,
-JOB_TITLE varchar(35) NOT NULL DEFAULT ' ',
-MIN_SALARY decimal(6,0) DEFAULT 8000,
-MAX_SALARY decimal(6,0) DEFAULT NULL
+    job_id integer NOT NULL UNIQUE PRIMARY KEY,
+    job_tittle varchar(35) NOT NULL DEFAULT ' ',
+    min_salary decimal(6,0) DEFAULT 8000,
+    max_salary decimal(6,0) DEFAULT NULL
 );
 
 
@@ -293,10 +293,10 @@ CREATE TABLE IF NOT EXISTS employees
 
 
 CREATE TABLE IF NOT EXISTS jobs (
-JOB_ID integer NOT NULL UNIQUE PRIMARY KEY,
-JOB_TITLE varchar(35) NOT NULL DEFAULT ' ',
-MIN_SALARY decimal(6,0) DEFAULT 8000,
-MAX_SALARY decimal(6,0) DEFAULT NULL
+job_id integer NOT NULL UNIQUE PRIMARY KEY,
+    job_tittle varchar(35) NOT NULL DEFAULT ' ',
+    min_salary decimal(6,0) DEFAULT 8000,
+    max_salary decimal(6,0) DEFAULT NULL
 );
 
 
